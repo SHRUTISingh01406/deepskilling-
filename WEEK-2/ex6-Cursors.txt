@@ -1,0 +1,162 @@
+/*==========================================================
+  Exercise 6 : Cursors
+==========================================================*/
+
+
+/*----------------------------------------------------------
+  Scenario 1
+  Generate monthly statements for all customers.
+----------------------------------------------------------*/
+
+DECLARE
+
+    CURSOR cur_transactions IS
+        SELECT c.CustomerID,
+               c.Name,
+               t.TransactionDate,
+               t.Amount,
+               t.TransactionType
+        FROM Customers c
+        JOIN Accounts a
+        ON c.CustomerID = a.CustomerID
+        JOIN Transactions t
+        ON a.AccountID = t.AccountID
+        WHERE t.TransactionDate BETWEEN TRUNC(SYSDATE, 'MM')
+                                    AND LAST_DAY(SYSDATE);
+
+    v_customer_id      Customers.CustomerID%TYPE;
+    v_name             Customers.Name%TYPE;
+    v_transaction_date Transactions.TransactionDate%TYPE;
+    v_amount           Transactions.Amount%TYPE;
+    v_transaction_type Transactions.TransactionType%TYPE;
+
+BEGIN
+
+    OPEN cur_transactions;
+
+    LOOP
+
+        FETCH cur_transactions
+        INTO v_customer_id,
+             v_name,
+             v_transaction_date,
+             v_amount,
+             v_transaction_type;
+
+        EXIT WHEN cur_transactions%NOTFOUND;
+
+        DBMS_OUTPUT.PUT_LINE('Customer : ' || v_name ||
+                             ' (ID : ' || v_customer_id || ')');
+
+        DBMS_OUTPUT.PUT_LINE('Date : ' ||
+                             TO_CHAR(v_transaction_date,'DD-MON-YYYY'));
+
+        DBMS_OUTPUT.PUT_LINE('Amount : ' || v_amount);
+
+        DBMS_OUTPUT.PUT_LINE('Type : ' || v_transaction_type);
+
+        DBMS_OUTPUT.PUT_LINE('--------------------------------');
+
+    END LOOP;
+
+    CLOSE cur_transactions;
+
+END;
+
+
+/*----------------------------------------------------------
+  Scenario 2
+  Deduct an annual maintenance fee
+  from every account.
+----------------------------------------------------------*/
+
+DECLARE
+
+    CURSOR cur_accounts IS
+        SELECT AccountID,
+               Balance
+        FROM Accounts;
+
+    v_account_id Accounts.AccountID%TYPE;
+    v_balance    Accounts.Balance%TYPE;
+
+    v_annual_fee CONSTANT NUMBER := 100;
+
+BEGIN
+
+    OPEN cur_accounts;
+
+    LOOP
+
+        FETCH cur_accounts
+        INTO v_account_id,
+             v_balance;
+
+        EXIT WHEN cur_accounts%NOTFOUND;
+
+        UPDATE Accounts
+        SET Balance = Balance - v_annual_fee
+        WHERE AccountID = v_account_id;
+
+        DBMS_OUTPUT.PUT_LINE(
+            'Annual fee deducted from Account ID : '
+            || v_account_id
+        );
+
+    END LOOP;
+
+    CLOSE cur_accounts;
+
+    COMMIT;
+
+END;
+
+
+/*----------------------------------------------------------
+  Scenario 3
+  Update the interest rate for all loans
+  according to the new policy.
+----------------------------------------------------------*/
+
+DECLARE
+
+    CURSOR cur_loans IS
+        SELECT LoanID,
+               InterestRate
+        FROM Loans;
+
+    v_loan_id       Loans.LoanID%TYPE;
+    v_interest_rate Loans.InterestRate%TYPE;
+
+    v_new_rate CONSTANT NUMBER := 5;
+
+BEGIN
+
+    OPEN cur_loans;
+
+    LOOP
+
+        FETCH cur_loans
+        INTO v_loan_id,
+             v_interest_rate;
+
+        EXIT WHEN cur_loans%NOTFOUND;
+
+        UPDATE Loans
+        SET InterestRate = v_new_rate
+        WHERE LoanID = v_loan_id;
+
+        DBMS_OUTPUT.PUT_LINE(
+            'Loan ID : '
+            || v_loan_id ||
+            ' updated to '
+            || v_new_rate || '%'
+        );
+
+    END LOOP;
+
+    CLOSE cur_loans;
+
+    COMMIT;
+
+END;

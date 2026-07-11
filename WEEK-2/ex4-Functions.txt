@@ -1,0 +1,114 @@
+==========================================================
+  Exercise 4 : Functions
+==========================================================
+
+----------------------------------------------------------
+  Scenario 1
+  Calculate the age of a customer using
+  the date of birth.
+----------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION CalculateAge
+(
+    p_dob DATE
+)
+RETURN NUMBER
+IS
+    v_age NUMBER;
+BEGIN
+
+    SELECT FLOOR(MONTHS_BETWEEN(SYSDATE, p_dob) / 12)
+    INTO v_age
+    FROM dual;
+
+    RETURN v_age;
+
+EXCEPTION
+
+    WHEN OTHERS THEN
+        RETURN NULL;
+
+END CalculateAge;
+
+
+----------------------------------------------------------
+  Scenario 2
+  Calculate the monthly loan installment (EMI).
+----------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION CalculateMonthlyInstallment
+(
+    p_loan_amount          NUMBER,
+    p_annual_interest_rate NUMBER,
+    p_loan_duration_years  NUMBER
+)
+RETURN NUMBER
+IS
+    v_monthly_rate NUMBER;
+    v_total_months NUMBER;
+    v_emi          NUMBER;
+BEGIN
+
+    -- Convert annual interest rate to monthly rate
+    v_monthly_rate := p_annual_interest_rate / 12 / 100;
+
+    -- Total repayment period in months
+    v_total_months := p_loan_duration_years * 12;
+
+    -- Calculate EMI
+    IF v_monthly_rate > 0 THEN
+
+        v_emi :=
+            (p_loan_amount * v_monthly_rate) /
+            (1 - POWER(1 + v_monthly_rate, -v_total_months));
+
+    ELSE
+
+        v_emi := p_loan_amount / v_total_months;
+
+    END IF;
+
+    RETURN v_emi;
+
+EXCEPTION
+
+    WHEN OTHERS THEN
+        RETURN NULL;
+
+END CalculateMonthlyInstallment;
+
+
+---------------------------------------------------------
+  Scenario 3
+  Check whether an account has sufficient
+  balance for a transaction.
+----------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION HasSufficientBalance
+(
+    p_account_id NUMBER,
+    p_amount     NUMBER
+)
+RETURN BOOLEAN
+IS
+    v_balance NUMBER;
+BEGIN
+
+    -- Fetch current account balance
+    SELECT Balance
+    INTO v_balance
+    FROM Accounts
+    WHERE AccountID = p_account_id;
+
+    -- Return TRUE if balance is sufficient
+    RETURN v_balance >= p_amount;
+
+EXCEPTION
+
+    WHEN NO_DATA_FOUND THEN
+        RETURN FALSE;
+
+    WHEN OTHERS THEN
+        RETURN FALSE;
+
+END HasSufficientBalance;

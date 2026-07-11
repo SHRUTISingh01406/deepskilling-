@@ -1,0 +1,118 @@
+==========================================================
+  Exercise 1 : Control Structures
+==========================================================
+----------------------------------------------------------
+  Scenario 1
+  Apply a 1% interest rate discount to customers
+  who are older than 60 years.
+----------------------------------------------------------
+
+DECLARE
+
+    CURSOR senior_customer IS
+        SELECT l.LoanID,
+               c.CustomerID,
+               l.InterestRate
+        FROM Customers c
+        JOIN Loans l
+        ON c.CustomerID = l.CustomerID
+        WHERE EXTRACT(YEAR FROM SYSDATE) -
+              EXTRACT(YEAR FROM c.DOB) > 60;
+
+BEGIN
+
+    FOR rec IN senior_customer LOOP
+
+        UPDATE Loans
+        SET InterestRate = InterestRate - 1
+        WHERE LoanID = rec.LoanID;
+
+        DBMS_OUTPUT.PUT_LINE(
+            'Discount applied successfully to Loan ID : ' ||
+            rec.LoanID
+        );
+
+    END LOOP;
+
+    COMMIT;
+
+END;
+
+----------------------------------------------------------
+  Scenario 2
+  Mark customers as VIP if their balance
+  is greater than $10,000.
+----------------------------------------------------------
+
+ALTER TABLE Customers
+ADD IsVIP CHAR(1);
+
+DECLARE
+
+    CURSOR customer_list IS
+        SELECT CustomerID,
+               Balance
+        FROM Customers;
+
+BEGIN
+
+    FOR rec IN customer_list LOOP
+
+        IF rec.Balance > 10000 THEN
+
+            UPDATE Customers
+            SET IsVIP = 'Y'
+            WHERE CustomerID = rec.CustomerID;
+
+            DBMS_OUTPUT.PUT_LINE(
+                'Customer ' || rec.CustomerID ||
+                ' has been promoted to VIP.'
+            );
+
+        ELSE
+
+            UPDATE Customers
+            SET IsVIP = 'N'
+            WHERE CustomerID = rec.CustomerID;
+
+        END IF;
+
+    END LOOP;
+
+    COMMIT;
+
+END;
+
+----------------------------------------------------------
+  Scenario 3
+  Display reminder messages for loans that
+  are due within the next 30 days.
+----------------------------------------------------------
+
+DECLARE
+
+    CURSOR due_loans IS
+        SELECT l.LoanID,
+               c.CustomerID,
+               c.Name,
+               l.EndDate
+        FROM Loans l
+        JOIN Customers c
+        ON l.CustomerID = c.CustomerID
+        WHERE l.EndDate BETWEEN SYSDATE
+                            AND SYSDATE + 30;
+
+BEGIN
+
+    FOR rec IN due_loans LOOP
+
+        DBMS_OUTPUT.PUT_LINE(
+            'Reminder: Dear ' || rec.Name ||
+            ', your Loan ID ' || rec.LoanID ||
+            ' is due on ' ||
+            TO_CHAR(rec.EndDate, 'DD-MON-YYYY')
+        );
+
+    END LOOP;
+
+END;
