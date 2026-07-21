@@ -9,7 +9,7 @@ main
     ├── JUnit_Mockito_and_SLF4J
     ├── PLSQL_Programming
     ├── Spring_Core_Maven
-    └── Upskilling
+    └── Spring_Data_JPA_with_Hibernate
 ```
 
 `main` is the default and active branch.
