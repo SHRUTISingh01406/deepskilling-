@@ -1,3 +1,3 @@
 # deepskilling-
-  -DSA_Week1
-  -Design_Pattern_Week1
+    -DSA_Week1
+    -Design_Pattern_Week1
