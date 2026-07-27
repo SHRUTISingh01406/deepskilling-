@@ -1,2 +1,7 @@
-# deepskilling-
-  -DSA_Week1
+# deepskilling
+
+## Branches
+
+- main
+  - DSA_Week1
+  
