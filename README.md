@@ -1,3 +1,8 @@
-# deepskilling-
-    -DSA_Week1
-    -Design_Pattern_Week1
+# deepskilling
+
+## Branches
+
+- main
+  - DSA_Week1
+  - Design_Patterns_Week1
+  
