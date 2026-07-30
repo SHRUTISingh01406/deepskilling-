@@ -13,4 +13,5 @@
   - Spring_Rest_using_SpringBoot3_Week5
   - React_Week6
   - GIT_Week7
+  - Angular_Week8
     
