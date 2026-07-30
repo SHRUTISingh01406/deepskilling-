@@ -1,0 +1,19 @@
+========================================================================
+Digital Nurture 5.0 | Angular (v20.0) | Student Course Portal Notes
+========================================================================
+
+Task 1 File Purpose Explanations:
+------------------------------------------------------------------------
+1. angular.json: Defines project workspace configuration, build targets, assets, scripts, styles, and CLI default options.
+2. tsconfig.json: Root TypeScript compiler configuration file setting base compiler options for the entire workspace.
+3. tsconfig.app.json: Application-specific TypeScript configuration extending tsconfig.json for compiling source code.
+4. package.json: Declares application dependencies, devDependencies, scripts (e.g. ng serve, ng build), and package metadata.
+5. src/main.ts: Application entry point file that bootstraps the Angular application (bootstraps AppModule or root standalone component/config).
+6. src/app/app.config.ts: Application configuration file for standalone Angular applications defining application providers and routing.
+7. src/app/app.component.ts: Root component class definition containing the top-level application logic, selector, template, and styles.
+8. src/index.html: Main HTML page container hosting the root <app-root> element where Angular renders the application.
+
+Budgets Configuration Documentation (architect > build > configurations > production):
+------------------------------------------------------------------------
+- maximumWarning: Threshold (e.g. 500kB) for initial bundle size; triggers a CLI warning during production build if exceeded.
+- maximumError: Hard limit threshold (e.g. 1MB) for initial bundle size; causes the production build to fail if exceeded to prevent shipping oversized bundles.

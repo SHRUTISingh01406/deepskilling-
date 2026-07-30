@@ -1,0 +1,47 @@
+<div class="course-list-container">
+  <h2>📚 Available Courses Catalog</h2>
+
+  <!-- Search & Filter Control -->
+  <div class="filter-bar">
+    <input type="text" [(ngModel)]="searchTerm" (ngModelChange)="onSearchChange()" placeholder="Filter courses by name..." class="search-input" />
+  </div>
+
+  <!-- Loading State (*ngIf) -->
+  <div *ngIf="isLoading" class="loading-box">
+    <p>Loading courses...</p>
+  </div>
+
+  <div *ngIf="error$ | async as error" class="error-banner">
+    ⚠️ {{ error }}
+  </div>
+
+  <!-- Course Grid Container (*ngIf with else block) -->
+  <div *ngIf="!isLoading">
+    <ng-container *ngIf="(courses$ | async) as courses; else noCourses">
+      <div *ngIf="courses.length > 0; else noCourses" class="course-grid">
+        <app-course-card
+          *ngFor="let course of courses; let i = index; trackBy: trackByCourseId"
+          [course]="course"
+          [isEnrolledOverride]="(enrolledIds$ | async)?.includes(course.id)"
+          (enrollRequested)="onEnroll($event)"
+          (click)="onCardClick(course.id)">
+        </app-course-card>
+      </div>
+    </ng-container>
+  </div>
+
+  <!-- Structural Directive Else Template -->
+  <ng-template #noCourses>
+    <div class="empty-state">
+      <p>No courses available.</p>
+    </div>
+  </ng-template>
+
+  <!-- Selected Course ID Feedback -->
+  <div *ngIf="selectedCourseId" class="selection-feedback">
+    <p>Selected course ID: <strong>{{ selectedCourseId }}</strong></p>
+  </div>
+
+  <!-- Service Singleton Demonstration Widget -->
+  <app-course-summary-widget></app-course-summary-widget>
+</div>

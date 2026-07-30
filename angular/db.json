@@ -1,0 +1,73 @@
+{
+  "courses": [
+    {
+      "id": 1,
+      "name": "Data Structures & Algorithms",
+      "code": "CS101",
+      "credits": 4,
+      "gradeStatus": "passed"
+    },
+    {
+      "id": 2,
+      "name": "Web Development Fundamentals",
+      "code": "CS102",
+      "credits": 3,
+      "gradeStatus": "passed"
+    },
+    {
+      "id": 3,
+      "name": "Database Management Systems",
+      "code": "CS201",
+      "credits": 4,
+      "gradeStatus": "pending"
+    },
+    {
+      "id": 4,
+      "name": "Software Engineering Principles",
+      "code": "CS202",
+      "credits": 3,
+      "gradeStatus": "passed"
+    },
+    {
+      "id": 5,
+      "name": "Cloud Computing & DevOps",
+      "code": "CS301",
+      "credits": 2,
+      "gradeStatus": "failed"
+    }
+  ],
+  "students": [
+    {
+      "id": 101,
+      "name": "Shruti Singh",
+      "email": "shruti.singh@example.com",
+      "gpa": 3.8
+    }
+  ],
+  "enrollments": [
+    {
+      "id": 1,
+      "studentName": "Shruti Singh",
+      "studentEmail": "shruti.singh@example.com",
+      "courseId": 1,
+      "preferredSemester": "Odd",
+      "additionalCourses": ["CS102"]
+    },
+    {
+      "id": 2,
+      "studentName": "Shruti Singh",
+      "studentEmail": "shruti.singh@example.com",
+      "courseId": 2,
+      "preferredSemester": "Even",
+      "additionalCourses": []
+    },
+    {
+      "id": 3,
+      "studentName": "Shruti Singh",
+      "studentEmail": "shruti.singh@example.com",
+      "courseId": 4,
+      "preferredSemester": "Odd",
+      "additionalCourses": []
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+<div class="home-container">
+  <!-- String Interpolation -->
+  <h1>{{ portalName }}</h1>
+
+  <p class="description">
+    Welcome to the Student Course Portal! Manage your academic path, explore course offerings, and track your degree progress seamlessly.
+  </p>
+
+  <!-- Component-scoped notification component demo -->
+  <app-notification></app-notification>
+
+  <!-- Stats Row -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <span class="stat-label">Courses Available</span>
+      <span class="stat-value">{{ availableCoursesCount }}</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">Enrolled</span>
+      <span class="stat-value">3</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">GPA</span>
+      <span class="stat-value">3.8</span>
+    </div>
+  </div>
+
+  <!-- Interactive Demo Section (Bindings) -->
+  <div class="interactive-section">
+    <h3>Interactive Binding Demos</h3>
+
+    <!-- Property & Event Binding -->
+    <div class="demo-block">
+      <h4>Property & Event Binding:</h4>
+      <button type="button" class="btn btn-enroll" [disabled]="!isPortalActive" (click)="onEnrollClick()">
+        Enroll Now
+      </button>
+      <p *ngIf="message" class="enroll-message">{{ message }}</p>
+    </div>
+
+    <!-- Two-Way Binding with [(ngModel)] -->
+    <div class="demo-block">
+      <h4>Two-Way Binding (ngModel):</h4>
+      <input type="text" [(ngModel)]="searchTerm" placeholder="Search courses..." class="search-input" />
+      <p class="search-preview">Searching for: <strong>{{ searchTerm }}</strong></p>
+    </div>
+  </div>
+</div>

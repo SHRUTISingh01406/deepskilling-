@@ -1,0 +1,34 @@
+<div class="course-card" [ngClass]="cardClasses" [ngStyle]="{'border-left': '6px solid ' + statusColor}" appHighlight="lightblue">
+  <div class="card-header">
+    <h3>{{ course.name }}</h3>
+    <span class="course-code">{{ course.code }}</span>
+  </div>
+
+  <div class="card-body">
+    <p class="credits-info">
+      <strong>Credits:</strong> {{ course.credits | creditLabel }}
+    </p>
+
+    <!-- *ngSwitch structural directive for grade status badges -->
+    <div class="status-container" [ngSwitch]="course.gradeStatus">
+      <span *ngSwitchCase="'passed'" class="badge badge-passed">Passed</span>
+      <span *ngSwitchCase="'failed'" class="badge badge-failed">Failed</span>
+      <span *ngSwitchDefault class="badge badge-pending">Pending</span>
+    </div>
+
+    <div *ngIf="isExpanded" class="details-section">
+      <p>Course ID: {{ course.id }}</p>
+      <p>Department: Computer Science</p>
+      <p>Status: {{ course.gradeStatus | uppercase }}</p>
+    </div>
+  </div>
+
+  <div class="card-actions">
+    <button type="button" class="btn btn-secondary" (click)="toggleExpand()">
+      {{ isExpanded ? 'Hide Details' : 'Show Details' }}
+    </button>
+    <button type="button" class="btn" [ngClass]="isEnrolled ? 'btn-danger' : 'btn-primary'" (click)="onEnrollClick($event)">
+      {{ isEnrolled ? 'Unenroll' : 'Enroll' }}
+    </button>
+  </div>
+</div>

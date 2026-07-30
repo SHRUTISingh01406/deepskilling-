@@ -1,0 +1,60 @@
+.profile-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  border: 1px solid #e2e8f0;
+}
+
+.avatar {
+  font-size: 3rem;
+  background: #f1f5f9;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.info h2 { margin: 0 0 0.5rem 0; color: #0f172a; }
+.info p { margin: 0.25rem 0; color: #475569; }
+
+.enrolled-section {
+  margin-top: 2rem;
+}
+
+.enrolled-section h3 {
+  color: #1e293b;
+  margin-bottom: 1rem;
+}
+
+.enrolled-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.enrolled-card {
+  background: #f0fdf4;
+  border-left: 4px solid #22c55e;
+  padding: 1rem;
+  border-radius: 6px;
+}
+
+.enrolled-card h4 { margin: 0 0 0.5rem 0; color: #166534; }
+.enrolled-card p { margin: 0; font-size: 0.9rem; color: #365314; }
+
+.empty-msg {
+  color: #64748b;
+  font-style: italic;
+}

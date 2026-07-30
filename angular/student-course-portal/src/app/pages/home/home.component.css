@@ -1,0 +1,101 @@
+.home-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+}
+
+h1 {
+  font-size: 2.25rem;
+  color: #0f172a;
+  margin-bottom: 0.75rem;
+}
+
+.description {
+  font-size: 1.1rem;
+  color: #475569;
+  line-height: 1.6;
+}
+
+.stats-row {
+  display: flex;
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.stat-card {
+  flex: 1;
+  background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 1.25rem;
+  text-align: center;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.9rem;
+  color: #64748b;
+  font-weight: 600;
+
+}
+
+.stat-value {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #2563eb;
+  margin-top: 0.25rem;
+}
+
+.interactive-section {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-top: 2rem;
+}
+
+.demo-block {
+  margin-top: 1.25rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px dashed #e2e8f0;
+}
+
+.demo-block:last-child {
+  border-bottom: none;
+}
+
+.btn-enroll {
+  background: #2563eb;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-enroll:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+}
+
+.enroll-message {
+  color: #16a34a;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 400px;
+  padding: 0.6rem 0.9rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.search-preview {
+  margin-top: 0.5rem;
+  color: #334155;
+}

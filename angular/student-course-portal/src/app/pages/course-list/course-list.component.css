@@ -1,0 +1,65 @@
+.course-list-container {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+}
+
+h2 {
+  color: #0f172a;
+  margin-bottom: 1.5rem;
+}
+
+.filter-bar {
+  margin-bottom: 1.5rem;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 450px;
+  padding: 0.6rem 1rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.loading-box {
+  padding: 2rem;
+  background: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  text-align: center;
+  border-radius: 8px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.error-banner {
+  background: #fef2f2;
+  border: 1px solid #fca5a5;
+  color: #991b1b;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.empty-state {
+  padding: 3rem;
+  text-align: center;
+  background: #f8fafc;
+  border-radius: 8px;
+  color: #64748b;
+}
+
+.selection-feedback {
+  margin-top: 1.5rem;
+  padding: 0.75rem 1rem;
+  background: #e0f2fe;
+  border-left: 4px solid #0284c7;
+  color: #0369a1;
+  border-radius: 4px;
+}
